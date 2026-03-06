@@ -15,10 +15,71 @@
 </head>
 
 <body>
-    <h1>EML生成テスト 📧</h1>
-    <button id="downloadBtn">メールファイル(.eml)を作成して保存</button>
-    <div id="editor-container">
-    </div>
+    <header>
+        <div class="header-background">
+            <img class="logo" src="logo.svg" alt="">
+        </div>
+    </header>
+
+    <main>
+        <section class="editor-section">
+            <input type="text" class="subject-input" placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
+            <div class="editor-wrapper">
+                <div id="editor">
+                    <p>ここにメール本文を書いてください。</p>
+                    <p>宛先ごとに変えたい部分は <strong>{{名前}}</strong> のように書いてね！</p>
+                </div>
+            </div>
+        </section>
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="custom-select" id="template-select">
+                    <h3 class="mail-template-label">メールテンプレート</h3>
+                    <div class="select-trigger">
+                        <span id="selected-text">テンプレートを選択</span>
+                        <div class="arrow">
+                            <svg width="22" height="14" viewBox="0 0 22 14" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M1.50012 1.50006L9.43203 11.5193C10.2328 12.5308 11.7675 12.5308 12.5682 11.5193L20.5001 1.50006" />
+                            </svg>
+                        </div>
+                        <ul class="select-options" id="select-options">
+                            <li class="option" data-value="1">テンプレートA</li>
+                            <li class="option" data-value="2">テンプレートB</li>
+                            <li class="option" data-value="3">テンプレートC</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3 class="section-title">宛先</h3>
+                <table>
+                    <tbody id="recipient-preview">
+                        <tr>
+                            <td>test@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>test@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn__address-add" aria-label="宛先追加">
+                    <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="12.5" />
+                        <line x1="14.5" y1="8.5" x2="14.5" y2="20.5" stroke-linecap="round" />
+                        <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="directory-edit">
+                <button class="btn__directory-edit">宛先リストを編集</button>
+                <button class="btn__directory-edit">宛先リストを編集</button>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <small>© 2023 Mailing App. All rights reserved.</small>
+    </footer>
 </body>
 
 </html>
