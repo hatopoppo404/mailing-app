@@ -51,17 +51,19 @@
                         </ul>
                     </div>
                 </div>
-                <h3 class="section-title">宛先</h3>
-                <table>
-                    <tbody id="recipient-preview">
-                        <tr>
-                            <td>test@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>test@example.com</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="address-list">
+                    <h3 class="section-title">宛先</h3>
+                    <table>
+                        <tbody id="recipient-preview">
+                            <tr>
+                                <td>test@example.com</td>
+                            </tr>
+                            <tr>
+                                <td>test@example.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <button class="btn__address-add" aria-label="宛先追加">
                     <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="14" cy="14" r="12.5" />
@@ -69,6 +71,26 @@
                         <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" stroke-linecap="round" />
                     </svg>
                 </button>
+                <div class="custom-select" id="multi-select">
+                    <div class="select-trigger">
+                        <span id="multi-selected-text">0件 作成</span>
+                    </div>
+                    <ul class="select-options">
+                        <li class="option-item">
+                            <label>
+                                <input type="checkbox" class="item-checkbox" value="item1">
+                                <span>テンプレートA</span>
+                            </label>
+                        </li>
+                        <li class="option-item">
+                            <label>
+                                <input type="checkbox" class="item-checkbox" value="item2">
+                                <span>テンプレートB</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn__save">メールを保存</button>
             </div>
             <div class="directory-edit">
                 <button class="btn__directory-edit">宛先リストを編集</button>

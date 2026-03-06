@@ -97,27 +97,32 @@ main {
 .editor-wrapper {
   border-radius: 20px;
   overflow: hidden;
-  height: 500px;
+  height: 90%;
   display: flex;
   flex-direction: column;
   background: #fff;
   border: #dfdfdf solid 1px;
   padding: 10px;
+  /* position: relative; */
 }
 
 /* ツールバーの強制上書き */
 .ql-toolbar.ql-snow {
-  background: rgba(117, 117, 117, 0.6) !important;
+  background: rgba(117, 117, 117, 0.1) !important;
   /* 半透明 */
-  backdrop-filter: blur(15px) !important;
+  backdrop-filter: blur(8px) !important;
   /* 強めにボカす */
-  -webkit-backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
   border: 1px solid rgba(255, 255, 255, 0.7) !important;
   /* ガラスの縁 */
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.2) !important;
   border-radius: 10px;
   margin-bottom: 2px;
   z-index: 1;
+  /* position: absolute;
+  top: 10px;
+  left: 10px;
+  width: calc(100% - 20px); */
 }
 
 .ql-container.ql-snow {
@@ -126,6 +131,7 @@ main {
   border-radius: 0 0 10px 10px;
   color: rgb(73, 73, 73);
   flex-grow: 1;
+  height: calc(100% - 40px);
 }
 
 .editor-wrapper:focus-within {
@@ -133,11 +139,11 @@ main {
 }
 
 .ql-snow .ql-stroke {
-  stroke: white !important;
+  stroke: rgb(72, 95, 121) !important;
 }
 
 .ql-snow .ql-fill {
-  fill: white !important;
+  fill: rgb(22, 120, 224) !important;
 }
 
 /* 右側：設定・宛先エリア */
@@ -168,7 +174,7 @@ main {
 
 }
 
-.mail-template-label {
+h3 {
   margin: 0 0 10px 0;
 }
 
@@ -248,6 +254,33 @@ main {
   display: block;
 }
 
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 10px;
+  padding: 6px;
+  overflow: hidden;
+}
+
+thead, tbody, tfoot {
+  background: none;
+  border-bottom: #dfdfdf solid 1px;
+  border-radius: 10px;
+}
+
+th, td {
+  background: none;
+  padding: 12px;
+  text-align: left;
+}
+
+tr:not(:last-child) th,
+tr:not(:last-child) td {
+  border-bottom: #dfdfdf solid 1px;
+}
+
 .btn__address-add {
   background: none;
   border: none;
@@ -272,6 +305,44 @@ main {
   stroke-width: 3;
   fill: none;
   z-index: 1;
+}
+
+.option-item label {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 100%;
+  /* 行全体をクリック可能にする */
+}
+
+.option-item input[type="checkbox"] {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.option-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn__save {
+
+  background-color: var(--font-color);
+  border: white solid 2px;
+  color: white;
+  padding: 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  width: 100%;
+  margin: 30px auto 0;
+  font-size: large;
+  transition: 0.3s;
+}
+
+.btn__save:hover {
+  background-color: var(--font-color);
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 }
 
 .directory-edit {

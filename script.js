@@ -21,7 +21,23 @@ options.forEach(option => {
 
         // 小窓を閉じる
         select.classList.remove('open');
-        console.log("閉じる命令を出したよ");
+    });
+});
+
+const multiSelect = document.getElementById('multi-select');
+const checkboxes = multiSelect.querySelectorAll('.item-checkbox');
+const displayText = document.getElementById('multi-selected-text');
+
+// チェックの状態が変わるたびに実行
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        // 1. チェックされている数を数える
+        const checkedCount = multiSelect.querySelectorAll('.item-checkbox:checked').length;
+
+        // 2. 表示を更新する
+        displayText.textContent = `${checkedCount}個 選択中`;
+
+        // ここで「小窓を閉じる」処理は書かない！（連続でチェックしたいから）
     });
 });
 
