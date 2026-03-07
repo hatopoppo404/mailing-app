@@ -52,20 +52,14 @@
                     </div>
                 </div>
 
-                <button class="variable-customize"><span>変数をカスタマイズ</span><span class="icon--arrow__right"><svg
-                            class="icon-next" viewBox="0 0 28 28">
-                            <path d="M12 21L18.9702 15.5787C19.9997 14.778 19.9997 13.222 18.9702 12.4213L12 7" />
-                            <circle cx="14" cy="14" r="12.5" />
-                        </svg></span></button>
-
                 <div class="address-list">
-                    <h3 class="section-title list-title"><span>宛先</span><span><span id="selected-count">0</span>件
-                            作成</span></h3>
+                    <!-- <h3 class="section-title list-title"><span>宛先</span><span><span id="selected-count">0</span>件
+                            作成</span></h3> -->
                     <div id="table-container">
                         <table>
                             <thead>
-                                <th class="selected-label"></th>
-                                <th class="selected-remove-icon"></th>
+                                <th class="selected-label">宛先</th>
+                                <th class="selected-remove-icon"><span id="selected-count">0</span>件</th>
                             </thead>
                             <tbody id="selected-table-body">
                                 <tr>
@@ -116,6 +110,13 @@
                         </ul>
                     </div>
                 </div>
+
+                <button class="variable-customize"><span>変数をカスタマイズ</span><span class="icon--arrow__right"><svg
+                            class="icon-next" viewBox="0 0 28 28">
+                            <path d="M12 21L18.9702 15.5787C19.9997 14.778 19.9997 13.222 18.9702 12.4213L12 7" />
+                            <circle cx="14" cy="14" r="12.5" />
+                        </svg></span></button>
+
             </div>
             <div class="float-sec">
                 <button class="btn__save">
