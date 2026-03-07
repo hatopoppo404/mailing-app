@@ -14,26 +14,26 @@
     <script src="script.js" defer></script>
 </head>
 
-<body>
+<body class="gradation-bg">
     <header>
-        <div class="header-background">
+        <div class="header-background glass-effect">
             <img class="logo" src="logo.svg" alt="">
         </div>
     </header>
 
     <main>
-        <section class="editor-section">
+        <section class="editor-section glass-effect">
             <input type="text" class="subject-input" placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
             <div class="editor-wrapper">
                 <div id="editor">
                     <p>ここにメール本文を書いてください。</p>
-                    <p>宛先ごとに変えたい部分は <strong>{{名前}}</strong> のように書いてね！</p>
+                    <p>宛先ごとに変えたい部分は <strong>{{名前}}</strong> のように設定できます。</p>
                 </div>
             </div>
         </section>
 
         <aside class="sidebar">
-            <div class="sidebar-section">
+            <div class="sidebar-section glass-effect">
                 <div class="custom-select" id="template-select">
                     <h3 class="mail-template-label">メールテンプレート</h3>
                     <div class="select-trigger">
@@ -51,50 +51,84 @@
                         </ul>
                     </div>
                 </div>
+
+                <button class="variable-customize"><span>変数をカスタマイズ</span><span class="icon--arrow__right"><svg
+                            class="icon-next" viewBox="0 0 28 28">
+                            <path d="M12 21L18.9702 15.5787C19.9997 14.778 19.9997 13.222 18.9702 12.4213L12 7" />
+                            <circle cx="14" cy="14" r="12.5" />
+                        </svg></span></button>
+
                 <div class="address-list">
-                    <h3 class="section-title">宛先</h3>
-                    <table>
-                        <tbody id="recipient-preview">
-                            <tr>
-                                <td>test@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>test@example.com</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <button class="btn__address-add" aria-label="宛先追加">
-                    <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="14" cy="14" r="12.5" />
-                        <line x1="14.5" y1="8.5" x2="14.5" y2="20.5" stroke-linecap="round" />
-                        <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" stroke-linecap="round" />
-                    </svg>
-                </button>
-                <div class="custom-select" id="multi-select">
-                    <div class="select-trigger">
-                        <span id="multi-selected-text">0件 作成</span>
+                    <h3 class="section-title list-title"><span>宛先</span><span><span id="selected-count">0</span>件
+                            作成</span></h3>
+                    <div id="table-container">
+                        <table>
+                            <thead>
+                                <th class="selected-label"></th>
+                                <th class="selected-remove-icon"></th>
+                            </thead>
+                            <tbody id="selected-table-body">
+                                <tr>
+                                    <td colspan="2" class="unselected">下のボタンで宛先を追加してください</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <ul class="select-options">
-                        <li class="option-item">
-                            <label>
-                                <input type="checkbox" class="item-checkbox" value="item1">
-                                <span>テンプレートA</span>
-                            </label>
-                        </li>
-                        <li class="option-item">
-                            <label>
-                                <input type="checkbox" class="item-checkbox" value="item2">
-                                <span>テンプレートB</span>
-                            </label>
-                        </li>
-                    </ul>
+                    <div class="address-add-sec">
+                        <button class="btn__address-add" id="add-address-btn" aria-label="宛先追加">
+                            <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="14" cy="14" r="12.5" />
+                                <line x1="14.5" y1="8.5" x2="14.5" y2="20.5" stroke-linecap="round" />
+                                <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" stroke-linecap="round" />
+                            </svg>
+                        </button>
+                        <ul class="address-options" id="address-options">
+                            <li class="option-item">
+                                <label>
+                                    <input type="checkbox" class="item-checkbox" value="item1" id="item1">
+                                    <span>テンプレートA</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label>
+                                    <input type="checkbox" class="item-checkbox" value="item2" id="item2">
+                                    <span>テンプレートB</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label>
+                                    <input type="checkbox" class="item-checkbox" value="item2" id="item3">
+                                    <span>テンプレートC</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label>
+                                    <input type="checkbox" class="item-checkbox" value="item2" id="item4">
+                                    <span>テンプレートD</span>
+                                </label>
+                            </li>
+                            <li class="option-item">
+                                <label>
+                                    <input type="checkbox" class="item-checkbox" value="item2" id="item5">
+                                    <span>テンプレートE</span>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <button class="btn__save">メールを保存</button>
             </div>
-            <div class="directory-edit">
-                <button class="btn__directory-edit">宛先リストを編集</button>
-                <button class="btn__directory-edit">宛先リストを編集</button>
+            <div class="float-sec">
+                <button class="btn__save">
+                    <svg class="icon-download" viewBox="0 0 40 40">
+                        <path
+                            d="M38 26V34C38 35.0609 37.5786 36.0783 36.8284 36.8284C36.0783 37.5786 35.0609 38 34 38H6C4.93913 38 3.92172 37.5786 3.17157 36.8284C2.42143 36.0783 2 35.0609 2 34V26M10 16L20 26M20 26L30 16M20 26V2" />
+                    </svg>
+                    メールを保存
+                </button>
+                <div class="directory-edit glass-effect">
+                    <button class="btn__directory-edit glass-effect">宛先リストを編集</button>
+                    <button class="btn__directory-edit glass-effect">宛先リストを編集</button>
+                </div>
             </div>
         </aside>
     </main>

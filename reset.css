@@ -161,3 +161,44 @@ input,
 select {
     vertical-align: middle;
 }
+
+/*
+ * The New CSS Reset
+ * ブラウザのデフォルトスタイルを完全に無効化する
+ */
+
+/* 1. display: block 以外のすべてのスタイルをリセット */
+*:where(:not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)) {
+    all: unset;
+    display: revert;
+    box-sizing: border-box;
+}
+
+/* 2. リストのポッチを消す */
+ol, ul {
+    list-style: none;
+}
+
+/* 3. 画像などがはみ出さないように */
+img {
+    max-width: 100%;
+}
+
+/* 4. テーブルの線を消し、計算を楽にする */
+table {
+    border-collapse: collapse;
+}
+
+/* 5. テキストの選択やカーソルを使いやすく */
+textarea {
+    white-space: revert;
+}
+
+meter {
+    -webkit-appearance: revert;
+    appearance: revert;
+}
+
+::placeholder {
+    all: unset;
+}
