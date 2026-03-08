@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mailing-app</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/dexie/dist/dexie.js" defer></script>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 
@@ -40,8 +39,8 @@
                     <h3 class="mail-template-label">メールテンプレート</h3>
                     <div class="select-trigger">
                         <span id="selected-text">テンプレートを選択</span>
-                        <div class="arrow">
-                            <svg width="22" height="14" viewBox="0 0 22 14" xmlns="http://www.w3.org/2000/svg">
+                        <div class="arrow" aria-hidden="true">
+                            <svg viewBox="0 0 22 14" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M1.50012 1.50006L9.43203 11.5193C10.2328 12.5308 11.7675 12.5308 12.5682 11.5193L20.5001 1.50006" />
                             </svg>
@@ -70,11 +69,13 @@
                     </div>
                     <div class="address-add-sec">
                         <button class="btn__address-add" id="add-address-btn" aria-label="宛先追加">
-                            <svg width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="14" cy="14" r="12.5" />
-                                <line x1="14.5" y1="8.5" x2="14.5" y2="20.5" stroke-linecap="round" />
-                                <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" stroke-linecap="round" />
-                            </svg>
+                            <span class="icon-add-address" aria-hidden="true">
+                                <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="14" cy="14" r="12.5" />
+                                    <line x1="14.5" y1="8.5" x2="14.5" y2="20.5" />
+                                    <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" />
+                                </svg>
+                            </span>
                         </button>
                         <ul class="address-options" id="address-options">
                             <li class="option-item">
@@ -91,19 +92,19 @@
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item2" id="item3">
+                                    <input type="checkbox" class="item-checkbox" value="item3" id="item3">
                                     <span>テンプレートC</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item2" id="item4">
+                                    <input type="checkbox" class="item-checkbox" value="item4" id="item4">
                                     <span>テンプレートD</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item2" id="item5">
+                                    <input type="checkbox" class="item-checkbox" value="item5" id="item5">
                                     <span>テンプレートE</span>
                                 </label>
                             </li>
@@ -111,25 +112,42 @@
                     </div>
                 </div>
 
-                <button class="variable-customize"><span>変数をカスタマイズ</span><span class="icon--arrow__right"><svg
-                            class="icon-next" viewBox="0 0 28 28">
-                            <path d="M12 21L18.9702 15.5787C19.9997 14.778 19.9997 13.222 18.9702 12.4213L12 7" />
-                            <circle cx="14" cy="14" r="12.5" />
-                        </svg></span></button>
+                <button class="variable-customize"><span>変数をカスタマイズ</span><span class="icon--arrow__right"><span
+                            class="icon-next" aria-hidden="true">
+                            <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 21L18.9702 15.5787C19.9997 14.778 19.9997 13.222 18.9702 12.4213L12 7" />
+                                <circle cx="14" cy="14" r="12.5" />
+                            </svg>
+                        </span></span></button>
 
             </div>
             <div class="float-sec">
                 <button class="btn__save">
-                    <svg class="icon-download" viewBox="0 0 40 40">
-                        <path
-                            d="M38 26V34C38 35.0609 37.5786 36.0783 36.8284 36.8284C36.0783 37.5786 35.0609 38 34 38H6C4.93913 38 3.92172 37.5786 3.17157 36.8284C2.42143 36.0783 2 35.0609 2 34V26M10 16L20 26M20 26L30 16M20 26V2" />
-                    </svg>
-                    メールを作成する
+                    <i class="icon-download" aria-hidden="true">
+                        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M38 26V34C38 35.0609 37.5786 36.0783 36.8284 36.8284C36.0783 37.5786 35.0609 38 34 38H6C4.93913 38 3.92172 37.5786 3.17157 36.8284C2.42143 36.0783 2 35.0609 2 34V26M10 16L20 26M20 26L30 16M20 26V2" />
+                        </svg>
+                    </i>
+                    <span>メールを作成する</span>
                 </button>
                 <div class="directory-edit glass-effect">
-                    <button class="btn__directory-edit glass-effect">宛先リストを編集</button>
+                    <button class="btn__directory-edit glass-effect">
+                        <i class="icon-user" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 9.5C9.06026 9.5 10.104 9.62415 11.1318 9.87305C12.1576 10.1215 13.1708 10.4942 14.1699 10.9932V10.9941C14.5704 11.2013 14.8915 11.5 15.1367 11.8994C15.3791 12.2942 15.5 12.7244 15.5 13.2002V15.5H0.5V13.2002C0.5 12.7244 0.620925 12.2942 0.863281 11.8994C1.10852 11.5 1.4287 11.2003 1.8291 10.9932C2.82852 10.494 3.84208 10.1216 4.86816 9.87305C5.89603 9.62415 6.93974 9.5 8 9.5ZM8 0.5C8.96634 0.5 9.78137 0.838007 10.4717 1.52832C11.162 2.21863 11.5 3.03366 11.5 4C11.5 4.96634 11.162 5.78137 10.4717 6.47168C9.78137 7.16199 8.96634 7.5 8 7.5C7.03366 7.5 6.21863 7.16199 5.52832 6.47168C4.83801 5.78137 4.5 4.96634 4.5 4C4.5 3.03366 4.83801 2.21863 5.52832 1.52832C6.21863 0.838007 7.03366 0.5 8 0.5Z" />
+                            </svg>
+                        </i>
+                        <span>宛先リストを編集</span>
+                    </button>
                     <button class="btn__save-template glass-effect">
-                        <i class="icon-save"></i>
+                        <i class="icon-save" aria-hidden="true">
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15.25 19.25V11.25H5.25V19.25M5.25 1.25V6.25H13.25M17.25 19.25H3.25C2.71957 19.25 2.21086 19.0393 1.83579 18.6642C1.46071 18.2891 1.25 17.7804 1.25 17.25V3.25C1.25 2.71957 1.46071 2.21086 1.83579 1.83579C2.21086 1.46071 2.71957 1.25 3.25 1.25H14.25L19.25 6.25V17.25C19.25 17.7804 19.0393 18.2891 18.6642 18.6642C18.2891 19.0393 17.7804 19.25 17.25 19.25Z" />
+                            </svg>
+                        </i>
                         <span>テンプレートとして保存</span>
                     </button>
                 </div>
