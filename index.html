@@ -81,31 +81,31 @@
                         <ul class="address-options" id="address-options">
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="1" id="item1">
+                                    <input type="checkbox" class="item-checkbox" value="template1" id="item1">
                                     <span>テンプレートA</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="2" id="item2">
+                                    <input type="checkbox" class="item-checkbox" value="template2" id="item2">
                                     <span>テンプレートB</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="3" id="item3">
+                                    <input type="checkbox" class="item-checkbox" value="template3" id="item3">
                                     <span>テンプレートC</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="4" id="item4">
+                                    <input type="checkbox" class="item-checkbox" value="template4" id="item4">
                                     <span>テンプレートD</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="5" id="item5">
+                                    <input type="checkbox" class="item-checkbox" value="template5" id="item5">
                                     <span>テンプレートE</span>
                                 </label>
                             </li>
@@ -160,8 +160,63 @@
     <footer>
         <small>© 2026 Mailing App. All rights reserved.</small>
     </footer>
-    <div class="address-list-edit-sec">
-
+    <div class="address-list-edit-sec modal-overlay is-open">
+        <div class="modal-content">
+            <h2 class="edit-title">宛先リスト編集</h2>
+            <table id="table__address-lists">
+                <thead>
+                    <th class="setName">セット名</th>
+                    <th class="addressee">名前</th>
+                    <th class="to">To</th>
+                    <th class="cc">Cc</th>
+                    <th class="bcc">Bcc</th>
+                </thead>
+                <tbody id="body__address-lists">
+                    <tr>
+                        <td class="setName">
+                            <div class="setName">
+                                <input type="text" name="setName1" id="setName1">
+                            </div>
+                        </td>
+                        <td class="addressee">
+                            <input type="text" name="addressee1" id="addressee1">
+                        </td>
+                        <td class="to">
+                            <input type="text" name="to1" id="to1">
+                        </td>
+                        <td class="cc">
+                            <input type="text" name="cc1" id="cc1">
+                        </td>
+                        <td class="bcc">
+                            <input type="text" name="bcc1" id="bcc1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="setName">
+                            <div class="setName">
+                                <input type="text" name="setName2" id="setName2">
+                            </div>
+                        </td>
+                        <td class="addressee">
+                            <input type="text" name="addressee2" id="addressee2">
+                        </td>
+                        <td class="to">
+                            <input type="text" name="to2" id="to2">
+                        </td>
+                        <td class="cc">
+                            <input type="text" name="cc2" id="cc2">
+                        </td>
+                        <td class="bcc">
+                            <input type="text" name="bcc2" id="bcc2">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="edit-close">
+                <button id="edit-ok" class="btn__address-list">OK</button>
+                <button id="edit-chancel" class="btn__address-list">chancel</button>
+            </div>
+        </div>
     </div>
     <div id="customAlert" class="modal-overlay">
         <div class="modal-content">
