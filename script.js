@@ -10,6 +10,7 @@ const checkboxes = document.querySelectorAll('.option-item input[type="checkbox"
 const countDisplay = document.getElementById('selected-count'); // 件数を表示する要素（HTMLに作ってね）
 const tableBody = document.getElementById('selected-table-body');
 const tableContainer = document.getElementById('table-container');
+const saveTemplateBtn = document.getElementById('btn__save-template');
 
 // 1. クリックで開閉
 trigger.addEventListener('click', () => {
@@ -101,10 +102,33 @@ window.addEventListener('click', (e) => {
 });
 // ----------------------------------------------------------------
 
+saveTemplateBtn.addEventListener('click', async () => {
+    const subjectText = document.getElementById('subject-input').value;
+    const bodyHTML = quill.root.innerHTML;
+    const addressSetIds = Array.from(document.querySelectorAll('.item-checkbox:checked'))
+        .map(cb => Number(cb.value));
+    const existing = await db.templates.where('subject').equals(subjectText).first();
+    const now = new Date();
+    const createdAtDate = existing ? existing.createdAt : now;
+    const updatedAtDate = now;
+
+    db.templates.put({
+        id: existing ? existing.id : undefined,
+        subject: subjectText,
+        body: bodyHTML,
+        addressSetId: addressSetIds,
+        createdAt: createdAtDate,
+        updatedAt: updatedAtDate
+    }).then(id => {
+        console.log('succeeded ID:', id);
+        alert('succeeded in saving!');
+    }).catch(err => {
+        alert('error :', err);
+    });
+
+});
+
 // ----------------------------------------------------------------
-
-
-
 
 // Quillの初期化
 const quill = new Quill('#editor', {
@@ -120,12 +144,35 @@ const quill = new Quill('#editor', {
 
 // ここに今後、本文監視やDB連携のJSを書いていくよ！
 
-const db = new Dexie("MailAppDB");
+const db = new Dexie("MailingAppDB");
 
 db.version(1).stores({
-    templates: '++id, to, subject, body, createdAt'
+    templates: '++id, subject, body, addressSetId, createdAt, updatedAt',
+    addressSets: '++id, setName, to, cc, bcc, addressee, createdAt, updatedAt',
+    settings: 'id, lastUsedTemplateID, lastUsedAddressSets, updatedAt'
 });
 
+db.open().catch(err => {
+    console.error("DBの接続エラー", err.stack || err);
+});
+
+// ----------------------------------------------------------------
+
+// アラート
+function showAlert(title, message) {
+    document.getElementById('alertTitle').innerText = title;
+    document.getElementById('alertMessage').innerText = message;
+    document.getElementById('customAlert').classList.add('is-open');
+
+    document.getElementById('alertClose').focus();
+}
+
+// 閉じるボタンのイベント
+document.getElementById('alertClose').addEventListener('click', () => {
+    document.getElementById('customAlert').classList.remove('is-open');
+});
+
+// ----------------------------------------------------------------
 
 // document.getElementById('downloadBtn').onclick = () => {
 //     // 1. データの準備（本来はフォームやエディタから取得する部分）

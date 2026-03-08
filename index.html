@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mailing-app</title>
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/dexie/dist/dexie.js" defer></script>
     <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script>
     <script src="script.js" defer></script>
@@ -16,14 +16,15 @@
 <body class="gradation-bg">
     <header>
         <div class="header-background glass-effect">
-            <img class="logo" src="logo.svg" alt="">
+            <img class="logo" src="img/logo.svg" alt="">
         </div>
     </header>
 
     <main>
         <section class="editor-section glass-effect">
             <div class="subject-and-save">
-                <input type="text" class="subject-input" placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
+                <input type="text" class="subject-input" id="subject-input"
+                    placeholder="件名を入力してください（例：{{company}}様へのお知らせ）">
             </div>
             <div class="editor-wrapper">
                 <div id="editor">
@@ -80,31 +81,31 @@
                         <ul class="address-options" id="address-options">
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item1" id="item1">
+                                    <input type="checkbox" class="item-checkbox" value="1" id="item1">
                                     <span>テンプレートA</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item2" id="item2">
+                                    <input type="checkbox" class="item-checkbox" value="2" id="item2">
                                     <span>テンプレートB</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item3" id="item3">
+                                    <input type="checkbox" class="item-checkbox" value="3" id="item3">
                                     <span>テンプレートC</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item4" id="item4">
+                                    <input type="checkbox" class="item-checkbox" value="4" id="item4">
                                     <span>テンプレートD</span>
                                 </label>
                             </li>
                             <li class="option-item">
                                 <label>
-                                    <input type="checkbox" class="item-checkbox" value="item5" id="item5">
+                                    <input type="checkbox" class="item-checkbox" value="5" id="item5">
                                     <span>テンプレートE</span>
                                 </label>
                             </li>
@@ -132,32 +133,44 @@
                     <span>メールを作成する</span>
                 </button>
                 <div class="directory-edit glass-effect">
-                    <button class="btn__directory-edit glass-effect">
+                    <button id="btn__directory-edit" class="btn__directory-edit glass-effect">
                         <i class="icon-user" aria-hidden="true">
-                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                <path
+                            <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
+                                <path transform="translate(2.5 2.5)"
                                     d="M8 9.5C9.06026 9.5 10.104 9.62415 11.1318 9.87305C12.1576 10.1215 13.1708 10.4942 14.1699 10.9932V10.9941C14.5704 11.2013 14.8915 11.5 15.1367 11.8994C15.3791 12.2942 15.5 12.7244 15.5 13.2002V15.5H0.5V13.2002C0.5 12.7244 0.620925 12.2942 0.863281 11.8994C1.10852 11.5 1.4287 11.2003 1.8291 10.9932C2.82852 10.494 3.84208 10.1216 4.86816 9.87305C5.89603 9.62415 6.93974 9.5 8 9.5ZM8 0.5C8.96634 0.5 9.78137 0.838007 10.4717 1.52832C11.162 2.21863 11.5 3.03366 11.5 4C11.5 4.96634 11.162 5.78137 10.4717 6.47168C9.78137 7.16199 8.96634 7.5 8 7.5C7.03366 7.5 6.21863 7.16199 5.52832 6.47168C4.83801 5.78137 4.5 4.96634 4.5 4C4.5 3.03366 4.83801 2.21863 5.52832 1.52832C6.21863 0.838007 7.03366 0.5 8 0.5Z" />
                             </svg>
                         </i>
                         <span>宛先リストを編集</span>
                     </button>
-                    <button class="btn__save-template glass-effect">
+                    <button id="btn__save-template" class="btn__save-template glass-effect">
                         <i class="icon-save" aria-hidden="true">
                             <svg viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M15.25 19.25V11.25H5.25V19.25M5.25 1.25V6.25H13.25M17.25 19.25H3.25C2.71957 19.25 2.21086 19.0393 1.83579 18.6642C1.46071 18.2891 1.25 17.7804 1.25 17.25V3.25C1.25 2.71957 1.46071 2.21086 1.83579 1.83579C2.21086 1.46071 2.71957 1.25 3.25 1.25H14.25L19.25 6.25V17.25C19.25 17.7804 19.0393 18.2891 18.6642 18.6642C18.2891 19.0393 17.7804 19.25 17.25 19.25Z" />
                             </svg>
                         </i>
-                        <span>テンプレートとして保存</span>
+                        <span>テンプレート保存</span>
                     </button>
                 </div>
             </div>
         </aside>
+
     </main>
 
     <footer>
-        <small>© 2023 Mailing App. All rights reserved.</small>
+        <small>© 2026 Mailing App. All rights reserved.</small>
     </footer>
+    <div class="address-list-edit-sec">
+
+    </div>
+    <div id="customAlert" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="alertTitle">確認</h2>
+            <p id="alertMessage">メッセージ</p>
+            <button id="alertClose">OK</button>
+        </div>
+    </div>
+
 </body>
 
 </html>

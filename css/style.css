@@ -528,10 +528,6 @@ td:has(.remove-selected) {
   transition: all 0.2s;
 }
 
-.variable-customize:hover .icon-next {
-  filter: brightness(0) saturate(100%) invert(52%) sepia(77%) saturate(1796%) hue-rotate(200deg) brightness(98%) contrast(96%);
-}
-
 .float-sec {
   display: flex;
   flex-direction: column;
@@ -624,4 +620,94 @@ footer {
   padding: var(--space-10) var(--space-20);
   text-align: center;
   color: var(--color-text-muted);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* 最初は完全に透明な黒にする */
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  /* ★background-color も transition に追加！ */
+  transition: background-color 100ms, visibility 100ms;
+  pointer-events: none;
+}
+
+/* アラートが「開いた」時の状態 */
+.modal-overlay.is-open {
+  /* ★開いた時に、ゆっくり半透明にする */
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 親がis-openになったら、中身を元の位置に戻す */
+.modal-overlay.is-open .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-content {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 100ms ease-out, opacity 100ms ease-out;
+
+  background: var(--color-panel-hover);
+  backdrop-filter: blur(10px);
+  border: var(--border-default);
+  box-shadow: 0 8px 32px var(--color-glass-shadow);
+
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+#alertTitle {
+  color: var(--color-border);
+  width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+#alertMessage {
+  color: var(--color-border);
+  width: 100%;
+  margin: 20px 0;
+}
+
+#alertClose {
+  padding: 8px 16px;
+  width: 30%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+#alertClose:focus {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+#alertClose:hover {
+  background: var(--color-panel-hover);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-hover);
+}
+
+.hidden {
+  display: none;
 }
