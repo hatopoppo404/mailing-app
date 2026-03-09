@@ -6,7 +6,7 @@
   --color-text-muted: #777;
   --color-text-default: rgb(73, 73, 73);
   --color-white: #fff;
-  --color-border: #dfdfdf;
+  --color-border: #cecece;
   --color-focus-ring: rgba(180, 216, 255, 0.5);
   --color-glass-bg: rgba(199, 199, 199, 0.3);
   --color-glass-shadow: rgba(0, 0, 0, 0.2);
@@ -513,7 +513,7 @@ td:has(.remove-selected) {
 }
 
 #table-container.is-fixed {
-  height: 40px;
+  height: 60px;
   overflow-y: auto;
   display: block;
 }

@@ -22,34 +22,69 @@ addAddressBtn.addEventListener('click', () => {
     tableContainer.classList.add('is-fixed');
 });
 
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        // チェックがついているものだけを数える
-        const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
-        if (countDisplay) countDisplay.textContent = checkedCount;
+// checkboxes.forEach(checkbox => {
+//     checkbox.addEventListener('change', () => {
+//         // チェックがついているものだけを数える
+//         const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+//         if (countDisplay) countDisplay.textContent = checkedCount;
 
-        // テーブルを更新
-        tableBody.innerHTML = '';
-        const checkedItems = Array.from(checkboxes).filter(cb => cb.checked);
-        checkedItems.forEach(cb => {
-            const label = cb.closest('.option-item').querySelector('label').textContent;
-            const row = document.createElement('tr');
-            const checkboxId = cb.id;
+//         // テーブルを更新
+//         tableBody.innerHTML = '';
+//         const checkedItems = Array.from(checkboxes).filter(cb => cb.checked);
+//         checkedItems.forEach(cb => {
+//             const label = cb.closest('.option-item').querySelector('label').textContent;
+//             const row = document.createElement('tr');
+//             const checkboxId = cb.id;
 
-            row.innerHTML = `
-                <td>${label}</td>
-                <td>
-                    <button class="remove-selected">
-                        <svg data-target="${checkboxId}" class="icon-backspace" viewBox="0 0 48 36">
-                            <path
-                                d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
-                        </svg></button>
-                </td>
-            `;
-            tableBody.appendChild(row);
-        });
+//             row.innerHTML = `
+//                 <td>${label}</td>
+//                 <td>
+//                     <button class="remove-selected">
+//                         <svg data-target="${checkboxId}" class="icon-backspace" viewBox="0 0 48 36">
+//                             <path
+//                                 d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
+//                         </svg></button>
+//                 </td>
+//             `;
+//             tableBody.appendChild(row);
+//         });
 
 
+//     });
+// });
+// 個別のforEachはやめて、親要素に対して1回だけ設定する
+const addressOptions = document.getElementById('address-options');
+
+addressOptions.addEventListener('change', (e) => {
+    // クリックされたのがチェックボックスだった場合のみ実行
+    if (!e.target.classList.contains('item-checkbox')) return;
+
+    // 最新のチェックボックス一覧をその場で取得
+    const allCheckboxes = addressOptions.querySelectorAll('.item-checkbox');
+
+    // ① チェックがついているものだけを数える
+    const checkedItems = Array.from(allCheckboxes).filter(cb => cb.checked);
+    if (countDisplay) countDisplay.textContent = checkedItems.length;
+
+    // ② テーブルを更新
+    tableBody.innerHTML = '';
+
+    checkedItems.forEach(cb => {
+        const labelText = cb.closest('label').querySelector('span').textContent;
+        const checkboxId = cb.id;
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${labelText}</td>
+            <td>
+                <button class="remove-selected">
+                    <svg data-target="${checkboxId}" class="icon-backspace" viewBox="0 0 48 36">
+                        <path d="M36 12L24 24M24 12L36 24M42 2H16L2 18L16 34H42C43.0609 34 44.0783 33.5786 44.8284 32.8284C45.5786 32.0783 46 31.0609 46 30V6C46 4.93913 45.5786 3.92172 44.8284 3.17157C44.0783 2.42143 43.0609 2 42 2Z" />
+                    </svg>
+                </button>
+            </td>
+        `;
+        tableBody.appendChild(row);
     });
 });
 
@@ -77,13 +112,17 @@ window.addEventListener('click', (e) => {
     // クリックされたのが「本体」でも「ボタン」でもない時だけ閉じる
     if (!select.contains(e.target) && !trigger.contains(e.target)) {
         select.classList.remove('open');
-    }
+    };
 
     // 【2つ目のアドレスリスト用】
     // クリックされたのが「本体」でも「ボタン」でもない時だけ閉じる
     if (!addressList.contains(e.target) && !addAddressBtn.contains(e.target)) {
         addressList.classList.remove('open');
         tableContainer.classList.remove('is-fixed');
+    };
+
+    if (!addressSetWindow.contains(e.target) && !addressSetsBtn.contains(e.target)) {
+        addressSetWindow.classList.remove('is-open');
     }
 });
 // ----------------------------------------------------------------
@@ -288,7 +327,6 @@ let currentAddressSets = [];
 async function loadAddressSets() {
     try {
         currentAddressSets = await db.addressSets.toArray() || [];
-        console.log("DBから取得したデータ:", currentAddressSets); // デバッグ用
         renderTable();
     } catch (err) {
         showAlert("取得失敗:", err);
@@ -373,6 +411,7 @@ document.getElementById('edit-ok').onclick = async () => {
         // ここでは最も確実な「全件上書き（bulkPut）」の例
         await db.addressSets.clear();
         await db.addressSets.bulkPut(currentAddressSets);
+        await renderAddressOptions();
         showAlert("Done", "保存完了！");
         addressSetWindow.classList.remove('is-open');
     } catch (err) {
@@ -390,6 +429,31 @@ document.getElementById('edit-cancel').onclick = async () => {
 
 // 初期実行
 loadAddressSets();
+renderAddressOptions();
+
+async function renderAddressOptions() {
+    const optionsList = document.getElementById('address-options');
+    if (!optionsList) return;
+
+    try {
+        // 1. DBから最新の宛先セットを取得
+        const addressSets = await db.addressSets.toArray();
+
+        // 2. HTMLを生成（テンプレートの構造を完全維持）
+        optionsList.innerHTML = addressSets.map(set => `
+            <li class="option-item">
+                <label>
+                    <input type="checkbox" class="item-checkbox" 
+                           value="${set.id}" id="item${set.id}">
+                    <span>${set.setName || '無題のセット'}</span>
+                </label>
+            </li>
+        `).join('');
+
+    } catch (err) {
+        console.error("オプションリストの更新に失敗:", err);
+    }
+}
 // ----------------------------------------------------------------
 
 // document.getElementById('downloadBtn').onclick = () => {
