@@ -287,7 +287,9 @@ main {
   top: 0;
   width: 280px;
   min-height: fit-content;
+  max-height: calc(100% - 600px);
   overflow: hidden;
+  overflow-y: scroll;
 }
 
 .sidebar-section.customize-panel {
@@ -370,6 +372,12 @@ h3 {
   transform: scale(0.7) scaleY(-1);
 }
 
+#selected-table-body {
+  max-height: 100px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 .select-options,
 .address-options {
   position: absolute;
@@ -402,6 +410,12 @@ h3 {
 .custom-select.open .select-options,
 ul.address-options.open {
   display: block !important;
+}
+
+.address-options {
+  max-height: 300px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .address-list {
@@ -772,6 +786,13 @@ footer {
   font-size: 1.2rem;
 }
 
+.table-container {
+  overflow-x: auto;
+  /* 横スクロールを許可 */
+  width: 100%;
+  /* border: 1px solid var(--color-border); */
+}
+
 table#table__address-lists {
   border-collapse: separate;
   border-spacing: 4px;
@@ -823,28 +844,24 @@ table#table__address-lists input {
   border-top-right-radius: var(--radius-lg);
 }
 
-#body__address-lists tr:first-child td.addressee {
-  border-top-left-radius: var(--radius-lg);
-}
-
-#body__address-lists tr:first-child td.bcc {
-  border-top-right-radius: var(--radius-lg);
-}
-
-#body__address-lists tr:first-child td.setName {
-  border-top-right-radius: var(--radius-lg);
-}
-
-#body__address-lists tr:last-child td.addressee {
-  border-bottom-left-radius: var(--radius-lg);
-}
-
 #body__address-lists tr:last-child div.setName {
   border-bottom-left-radius: var(--radius-lg);
   border-bottom-right-radius: var(--radius-lg);
 }
 
-#body__address-lists tr:last-child td.bcc {
+#body__address-lists tr:first-child td.first-col {
+  border-top-left-radius: var(--radius-lg);
+}
+
+#body__address-lists tr:first-child td.last-col {
+  border-top-right-radius: var(--radius-lg);
+}
+
+#body__address-lists tr:last-child td.first-col {
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+#body__address-lists tr:last-child td.last-col {
   border-bottom-right-radius: var(--radius-lg);
 }
 
@@ -863,6 +880,34 @@ th.setName {
 
 th.addressee, th.to, th.cc, th.bcc {
   width: auto;
+}
+
+.sticky-left,
+.sticky-right {
+  position: sticky;
+  background-color: var(--color-bg-white);
+  /* 背景色をつけないと後ろの文字が透けるよ */
+  z-index: 2;
+  /* スクロールする中身より上に持ってくる */
+}
+
+/* 左端を固定 */
+.sticky-left {
+  left: 0;
+  border-right: 2px solid var(--color-border);
+}
+
+/* 右端を固定 */
+.sticky-right {
+  right: 0;
+  border-left: 2px solid var(--color-border);
+}
+
+/* ヘッダーのstickyが最優先 */
+#table__address-lists th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
 }
 
 button.remove-thisAddressSet svg * {

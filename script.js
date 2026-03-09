@@ -187,7 +187,7 @@ const db = new Dexie("MailingAppDB");
 
 db.version(1).stores({
     templates: '++id, subject, body, addressSetId, createdAt, updatedAt',
-    addressSets: '++id, setName, to, cc, bcc, addressee, createdAt, updatedAt',
+    addressSets: '++id, setName, to, cc, bcc, addressee, co, createdAt, updatedAt',
     settings: 'id, lastUsedTemplateID, lastUsedAddressSets, updatedAt'
 });
 
@@ -349,6 +349,10 @@ function renderTable() {
                            value="${item.setName || ''}" data-index="${index}" data-key="setName">
                 </div>
             </td>
+            <td class="co first-col">
+                <input type="text" name="co${index + 1}" id="co${index + 1}" 
+                       value="${item.co || ''}" data-index="${index}" data-key="co">
+            </td>
             <td class="addressee">
                 <input type="text" name="addressee${index + 1}" id="addressee${index + 1}" 
                        value="${item.addressee || ''}" data-index="${index}" data-key="addressee">
@@ -361,7 +365,7 @@ function renderTable() {
                 <input type="text" name="cc${index + 1}" id="cc${index + 1}" 
                        value="${item.cc || ''}" data-index="${index}" data-key="cc">
             </td>
-            <td class="bcc">
+            <td class="bcc last-col">
                 <input type="text" name="bcc${index + 1}" id="bcc${index + 1}" 
                        value="${item.bcc || ''}" data-index="${index}" data-key="bcc">
             </td>
