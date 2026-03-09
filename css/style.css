@@ -286,6 +286,8 @@ main {
   right: 0;
   top: 0;
   width: 280px;
+  min-height: fit-content;
+  overflow: hidden;
 }
 
 .sidebar-section.customize-panel {
