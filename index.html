@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/dexie/dist/dexie.js" defer></script>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
     <script src="script.js" defer></script>
 </head>
 
@@ -160,8 +163,8 @@
     <footer>
         <small>© 2026 Mailing App. All rights reserved.</small>
     </footer>
-    <div class="address-list-edit-sec modal-overlay is-open">
-        <div class="modal-content">
+    <div class="address-list-edit-sec modal-overlay" id="address-list-edit-Container">
+        <div class="modal-content" id="address-list-edit-window">
             <h2 class="edit-title">宛先リスト編集</h2>
             <table id="table__address-lists">
                 <thead>
@@ -170,6 +173,7 @@
                     <th class="to">To</th>
                     <th class="cc">Cc</th>
                     <th class="bcc">Bcc</th>
+                    <th class="remove"></th>
                 </thead>
                 <tbody id="body__address-lists">
                     <tr>
@@ -212,9 +216,18 @@
                     </tr>
                 </tbody>
             </table>
+            <button id="edit-add" class="btn__address-list">
+                <span class="icon-add-address" aria-hidden="true">
+                    <svg viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="14" cy="14" r="12.5" />
+                        <line x1="14.5" y1="8.5" x2="14.5" y2="20.5" />
+                        <line x1="8.5" y1="14.5" x2="20.5" y2="14.5" />
+                    </svg>
+                </span>
+            </button>
             <div class="edit-close">
                 <button id="edit-ok" class="btn__address-list">OK</button>
-                <button id="edit-chancel" class="btn__address-list">chancel</button>
+                <button id="edit-cancel" class="btn__address-list">cancel</button>
             </div>
         </div>
     </div>
@@ -225,7 +238,16 @@
             <button id="alertClose">OK</button>
         </div>
     </div>
-
+    <div id="customConfirm" class="modal-overlay">
+        <div class="modal-content" id="confirmWindow">
+            <h2 id="confirmTitle">確認</h2>
+            <p id="confirmMessage">メッセージ</p>
+            <div class="confirmBtn">
+                <button id="confirmOk">OK</button>
+                <button id="confirmCancel">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
