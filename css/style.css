@@ -39,12 +39,13 @@
   --radius-full: 9999px;
 
   --border-default: 1px solid var(--color-border);
-  --shadow-glass: 0 0 6px var(--color-glass-shadow);
+  /* --shadow-glass: 0 0 6px var(--color-glass-shadow); */
+  --shadow-glass: 0 0 12px #000;
   --shadow-hover: 0 0 8px rgba(0, 0, 0, 0.3);
   --focus-ring: 0 0 0 3px var(--color-focus-ring);
   --transition-default: 0.3s;
 
-  --sidebar-width: 280px;
+  --sidebar-width: 320px;
   --footer-offset: 200px;
   --icon-size-sm: 20px;
   --icon-size-md: 21px;
@@ -143,7 +144,6 @@ header {
 main {
   display: flex;
   flex: 1 0 0;
-  overflow: hidden;
   gap: var(--space-20);
   padding: var(--space-20);
 }
@@ -268,7 +268,7 @@ main {
   flex: 0 0 var(--sidebar-width);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   position: relative;
 }
 
@@ -276,25 +276,16 @@ main {
   border-radius: var(--radius-2xl);
   padding: var(--space-24);
   margin-bottom: var(--space-20);
-  max-height: calc(100% - var(--footer-offset));
   overflow: visible;
   display: flex;
   flex-direction: column;
   gap: var(--space-32);
-  height: fit-content;
   position: absolute;
   right: 0;
   top: 0;
-  width: 280px;
-  min-height: fit-content;
-  max-height: calc(100% - 600px);
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-.sidebar-section.customize-panel {
-  width: fit-content;
-  width: 600px;
+  width: var(--sidebar-width);
+  height: var(100% - 280px);
+  z-index: 1;
 }
 
 h3 {
@@ -372,12 +363,6 @@ h3 {
   transform: scale(0.7) scaleY(-1);
 }
 
-#selected-table-body {
-  max-height: 100px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
 .select-options,
 .address-options {
   position: absolute;
@@ -394,7 +379,16 @@ h3 {
   z-index: 9999 !important;
   cursor: pointer;
   display: none;
-  overflow: hidden;
+}
+
+#table-container{
+  overflow: auto;
+  max-height: 300px;
+}
+#table-container thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .select-options {
@@ -413,9 +407,7 @@ ul.address-options.open {
 }
 
 .address-options {
-  max-height: 300px;
-  overflow: hidden;
-  overflow-y: scroll;
+  /* max-height: 300px; */
 }
 
 .address-list {
@@ -529,7 +521,7 @@ td:has(.remove-selected) {
 }
 
 #table-container.is-fixed {
-  height: 60px;
+  height: 70px;
   overflow-y: auto;
   display: block;
 }
@@ -626,7 +618,7 @@ td:has(.remove-selected) {
   flex-direction: column;
   gap: var(--space-20);
   position: absolute;
-  width: 280px;
+  width: var(--sidebar-width);
   right: 0;
   bottom: 0;
 }
@@ -805,7 +797,7 @@ table#table__address-lists th {
 }
 
 table#table__address-lists td {
-  overflow: hidden;
+  /* overflow: hidden; */
   color: var(--color-bg-dark);
   border: none;
 }
@@ -886,9 +878,7 @@ th.addressee, th.to, th.cc, th.bcc {
 .sticky-right {
   position: sticky;
   background-color: var(--color-bg-white);
-  /* 背景色をつけないと後ろの文字が透けるよ */
   z-index: 2;
-  /* スクロールする中身より上に持ってくる */
 }
 
 /* 左端を固定 */
@@ -1085,4 +1075,33 @@ button.remove-thisAddressSet svg * {
 
 .hidden {
   display: none;
+}
+
+
+/* スクロールバー全体の幅 */
+.custom-scrollbar {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* レールを完全に透明にする */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* つまみを半透明にする */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  /* 黒の20%透明 */
+  border-radius: 10px;
+}
+
+/* ホバーした時に少し濃くする */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+  /* 黒の50%透明 */
 }
